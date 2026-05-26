@@ -1,0 +1,25 @@
+============================================================
+SURVIVAL ANALYSIS — VULNERABILITY PRIORITIZATION
+============================================================
+
+Dataset: 108,416 CVEs, 764 exploited (0.7%)
+Median time-to-exploitation: 269 days
+
+Concordance indices (0.5 = random, 1.0 = perfect):
+  Cox model: 0.938
+  EPSS:      0.918
+  CVSS:      0.728
+
+Top 5 hazard ratios:
+  EPSS Score (+0.10): HR=148.55 [124.69–176.98] p=0.0
+  Vendor: Enterprise SW vs Niche: HR=1.82 [1.49–2.24] p=0.0
+  Vendor: Hyperscaler / Major OS vs Niche: HR=1.73 [1.56–1.93] p=0.0
+  Attack Vector: Local vs Physical: HR=1.24 [1.10–1.40] p=0.0004
+  CWE: Memory Corruption vs Other: HR=1.23 [1.09–1.40] p=0.0012
+
+Top 5 ranking inversions (lower CVSS, higher survival priority):
+  CVE-2021-1675 CVSS 7.8 → rank #1 vs CVE-2023-22850 CVSS 8.8 → rank #262
+  CVE-2021-1675 CVSS 7.8 → rank #1 vs CVE-2020-24051 CVSS 9.8 → rank #261
+  CVE-2021-1675 CVSS 7.8 → rank #1 vs CVE-2022-27626 CVSS 10.0 → rank #258
+  CVE-2021-1675 CVSS 7.8 → rank #1 vs CVE-2023-48388 CVSS 9.8 → rank #257
+  CVE-2021-1675 CVSS 7.8 → rank #1 vs CVE-2021-42072 CVSS 8.8 → rank #255
