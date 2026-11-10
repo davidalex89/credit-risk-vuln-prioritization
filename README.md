@@ -52,7 +52,7 @@ pip install lifelines pandas numpy requests scipy tqdm
 python3 vuln_survival.py
 ```
 
-On first run, fetches NVD data (takes ~5–10 minutes across 2019–2023 with 119-day API windows). Subsequent runs load from `_cache.pkl` and complete in under 30 seconds.
+On first run, fetches NVD data (takes ~5–10 minutes across 2019–2023 with 119-day API windows). Subsequent runs load from `_cache.csv` and complete in under 30 seconds.
 
 Outputs:
 - `chart_data.json` — all model results for the interactive dashboard
@@ -66,7 +66,7 @@ Outputs:
 | `chart_data.json` | Dashboard data output (KM curves, hazard ratios, priority queue, inversions) |
 | `results.txt` | Plain-text model summary |
 
-`_cache.pkl` (NVD dataset cache) is gitignored — regenerate with a fresh run.
+`_cache.csv` (NVD dataset cache) is gitignored — regenerate with a fresh run.
 
 ## Limitations
 

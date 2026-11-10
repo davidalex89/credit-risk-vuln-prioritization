@@ -12,7 +12,7 @@ Outputs:
   - results.txt       (narrative summary)
 """
 
-import json, math, random, sys, time, warnings, pickle
+import json, math, random, sys, time, warnings
 from datetime import datetime, timedelta, date
 from pathlib import Path
 import requests
@@ -631,22 +631,19 @@ def km_at_days(km_results, days_list=[30, 90, 180, 365, 730]):
 # ─────────────────────────────────────────────
 def main():
     out = {}
-    CACHE = OUT_DIR / "_cache.pkl"
+    CACHE = OUT_DIR / "_cache.csv"
 
     # --- Data (with disk cache to avoid re-fetching NVD on retry) ---
     if CACHE.exists():
         print("Loading cached dataset …", flush=True)
-        # Local cache this script wrote itself on a previous run, never a downloaded file.
-        with open(CACHE, "rb") as f:
-            df = pickle.load(f)  # nosemgrep: python.lang.security.deserialization.pickle.avoid-pickle
+        df = pd.read_csv(CACHE, index_col="cve_id")
         print(f"  Loaded {len(df):,} rows from cache", flush=True)
     else:
         kev_df   = fetch_kev()
         nvd_df   = fetch_nvd()
         epss_map = fetch_epss(nvd_df.index.tolist())
         df = build_dataset(nvd_df, kev_df, epss_map)
-        with open(CACHE, "wb") as f:
-            pickle.dump(df, f)  # nosemgrep: python.lang.security.deserialization.pickle.avoid-pickle
+        df.to_csv(CACHE)
         print(f"  Saved dataset to cache ({CACHE})", flush=True)
 
     # --- KM ---

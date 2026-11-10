@@ -1,4 +1,4 @@
-_cache.pkl
+_cache.csv
 __pycache__/
 *.pyc
 .DS_Store
