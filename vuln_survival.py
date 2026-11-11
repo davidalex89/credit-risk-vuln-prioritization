@@ -12,7 +12,7 @@ Outputs:
   - results.txt       (narrative summary)
 """
 
-import json, random, sys, time, warnings
+import json, random, time, warnings
 from datetime import datetime, timedelta, date
 from pathlib import Path
 import requests
