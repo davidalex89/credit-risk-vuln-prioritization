@@ -12,7 +12,7 @@ Outputs:
   - results.txt       (narrative summary)
 """
 
-import json, math, random, sys, time, warnings
+import json, random, sys, time, warnings
 from datetime import datetime, timedelta, date
 from pathlib import Path
 import requests
@@ -201,7 +201,9 @@ def fetch_epss(cve_ids):
             r.raise_for_status()
             for row in r.json().get("data", []):
                 scores[row["cve"]] = float(row["epss"])
-        except:
+        except (requests.RequestException, ValueError, KeyError, TypeError):
+            # A failed or malformed batch costs those CVEs their EPSS score;
+            # build_dataset fills the gap with the median rather than stopping the run.
             pass
         time.sleep(0.2)
     print(f"  EPSS scores retrieved: {len(scores):,}")
